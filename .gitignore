@@ -1,0 +1,5 @@
+# npm 包
+/node_modules
+
+# 打包目录
+/dist
