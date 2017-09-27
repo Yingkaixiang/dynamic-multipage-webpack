@@ -1,18 +1,19 @@
-import Koa from 'koa'
-import KoaRouter from 'koa-router'
-import KoaLogger from 'koa-logger'
-import KoaPug from 'koa-pug'
-import KoaStatic from 'koa-static'
-import path from 'path'
+import Koa from 'koa';
+import KoaRouter from 'koa-router';
+import KoaLogger from 'koa-logger';
+import KoaPug from 'koa-pug';
+import KoaStatic from 'koa-static';
+import path from 'path';
+import _ from 'lodash';
 
-import routes from './routes'
+import routes from './routes';
 
-global.ENV = process.env.NODE_ENV || 'development'
-const isDev = ENV === 'development'
+global.ENV = process.env.NODE_ENV || 'development';
+const isDev = ENV === 'development';
 
-const app = new Koa()
-const router = new KoaRouter()
-routes(router)
+const app = new Koa();
+const router = new KoaRouter();
+routes(router);
 
 /**
  * 模板引擎初始化
@@ -27,15 +28,15 @@ const pug = new KoaPug({
   compileDebug: isDev,
   locals: { ENV, timestamp: Date.now() },
   noCache: isDev,
-  helperPath: [{ _: require('lodash') }]
-})
-pug.use(app)
+  helperPath: [{ _ }],
+});
+pug.use(app);
 
-app.use(KoaLogger())
+app.use(KoaLogger());
 app.use(KoaStatic(path.resolve(__dirname, './publics'), {
-  maxage: 1000 * 60 * 60
-}))
-app.use(router.routes())
-app.use(router.allowedMethods())
+  maxage: 1000 * 60 * 60,
+}));
+app.use(router.routes());
+app.use(router.allowedMethods());
 
-app.listen(process.env.NODE_PORT || '3000')
+app.listen(process.env.NODE_PORT || '3000');
