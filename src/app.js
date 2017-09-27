@@ -5,11 +5,14 @@ import KoaPug from 'koa-pug'
 import KoaStatic from 'koa-static'
 import path from 'path'
 
+import routes from './routes'
+
 global.ENV = process.env.NODE_ENV || 'development'
 const isDev = ENV === 'development'
 
 const app = new Koa()
 const router = new KoaRouter()
+routes(router)
 
 /**
  * 模板引擎初始化
@@ -34,10 +37,5 @@ app.use(KoaStatic(path.resolve(__dirname, './publics'), {
 }))
 app.use(router.routes())
 app.use(router.allowedMethods())
-
-router.get('user', '/users/:id', async (ctx, next) => {
-  const { id } = ctx.params
-  await ctx.render('test', {})
-})
 
 app.listen(process.env.NODE_PORT || '3000')
