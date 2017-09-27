@@ -1,3 +1,3 @@
 export async function getCurrentTime(ctx, next) {
-  ctx.body = Date.now()
+  await ctx.render('test.pug')
 }
