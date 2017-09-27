@@ -1,10 +1,15 @@
+var path = require('path')
+var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
-var path = require('path')
+var MyHtmlWebpackPlugin = require('./myHtmlWebpackPlugin');
 
 module.exports = {
   entry: {
-    test: './dist/publics/test.js',
+    test: [
+      './dist/publics/test.js',
+      './dist/publics/test1.js',
+    ],
   },
   output: {
     path: path.resolve(__dirname, './dist/publics/'),
@@ -16,7 +21,10 @@ module.exports = {
       template: 'src/views/test.pug',
       filename: '../views/test.pug',
       inject: 'body',
+      hash: true,
+      chunks: ['test'],
     }),
+    new MyHtmlWebpackPlugin(),
     new HtmlWebpackPugPlugin(),
   ],
 };
