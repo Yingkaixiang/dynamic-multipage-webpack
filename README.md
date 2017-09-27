@@ -16,3 +16,11 @@ npm run dev
 // 打包
 npm run build
 ```
+
+## 线上部署
+
+```dist``` 目录下的代码为打包后的生产代码，部署至服务器即可使用
+
+```
+NODE_ENV=production NODE_PORT=<port> node app.js
+```
