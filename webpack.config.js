@@ -3,16 +3,32 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
 const MyHtmlWebpackPlugin = require('./lib/myHtmlWebpackPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const mainfest = require('./lib/mainfest.js');
+
+const getEntries = () => {
+  const entry = {};
+  const plugins = {};
+  const htmlPlugin = {
+    inject: 'body',
+    hash: true,
+  };
+  Object.keys(mainfest).forEach((item) => {
+    const { js, page } = mainfest[item];
+    entry[item] = js;
+    plugins[item] = new HtmlWebpackPlugin(Object.assign(htmlPlugin, page));
+  });
+  return { entry, plugins };
+};
 
 module.exports = {
   entry: {
-    tests: [
-      './src/publics/test.js',
-      './src/publics/test1.js',
+    demo: [
+      './src/publics/js/common.js',
+      './src/publics/js/demo.js',
     ],
   },
   output: {
-    path: path.resolve(__dirname, './dist/publics/'),
+    path: path.resolve(__dirname, './dist/publics/js'),
     publicPath: '/',
     filename: '[name].js',
   },
@@ -28,13 +44,13 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin('../css/[name].css'),
     new HtmlWebpackPlugin({
-      template: 'src/views/test.pug',
-      filename: '../views/test.pug',
+      template: './src/views/mobile/demo.pug',
+      filename: '../../views/mobile/demo.pug',
       inject: 'body',
       hash: true,
-      chunks: ['tests'],
+      chunks: ['demo'],
     }),
     new MyHtmlWebpackPlugin(),
     new HtmlWebpackPugPlugin(),
