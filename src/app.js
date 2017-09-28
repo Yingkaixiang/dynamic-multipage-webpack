@@ -34,7 +34,7 @@ pug.use(app);
 
 app.use(KoaLogger());
 app.use(KoaStatic(path.resolve(__dirname, './publics'), {
-  maxage: 1000 * 60 * 60,
+  maxage: (isDev ? 0 : 1000 * 60 * 60),
 }));
 app.use(router.routes());
 app.use(router.allowedMethods());

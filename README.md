@@ -15,6 +15,9 @@ npm run dev
 
 // 打包
 npm run build
+
+// 本地启动线上环境代码
+npm run start
 ```
 
 ## 线上部署

@@ -1,9 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
-var MyHtmlWebpackPlugin = require('./lib/myHtmlWebpackPlugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
+const MyHtmlWebpackPlugin = require('./lib/myHtmlWebpackPlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
