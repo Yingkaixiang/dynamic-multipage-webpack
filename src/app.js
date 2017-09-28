@@ -5,8 +5,11 @@ import KoaPug from 'koa-pug';
 import KoaStatic from 'koa-static';
 import path from 'path';
 import _ from 'lodash';
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-koa2-middleware';
 
 import routes from './routes';
+import webpackConfig from '../webpack.config';
 
 global.ENV = process.env.NODE_ENV || 'development';
 const isDev = ENV === 'development';
@@ -32,6 +35,14 @@ const pug = new KoaPug({
 });
 pug.use(app);
 
+app.use(webpackMiddleware(
+  webpack(webpackConfig),
+  {
+    serverSideRender: true,
+    lazy: true,
+    publicPath: '/',
+  },
+));
 app.use(KoaLogger());
 app.use(KoaStatic(path.resolve(__dirname, './publics'), {
   maxage: (isDev ? 0 : 1000 * 60 * 60),

@@ -1,5 +1,3 @@
-try {
-  require('./reset.scss');
-} catch (err) {
-  document.write('<h1>hello world<h1>'); 
-}
+require('./reset.scss');
+
+document.write('<h1>hello world<h1>')

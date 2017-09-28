@@ -1,3 +1,4 @@
 export async function getCurrentTime(ctx, next) {
-  await ctx.render('test.pug')
+  const source = ctx.state.webpackStats.toJson().assetsByChunkName
+  await ctx.render('test.pug', source)
 }
