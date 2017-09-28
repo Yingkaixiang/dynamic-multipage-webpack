@@ -3,10 +3,12 @@ import KoaRouter from 'koa-router';
 import KoaLogger from 'koa-logger';
 import KoaPug from 'koa-pug';
 import KoaStatic from 'koa-static';
-import path from 'path';
-import _ from 'lodash';
+
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-koa2-middleware';
+
+import path from 'path';
+import _ from 'lodash';
 
 import routes from './routes';
 import webpackConfig from '../webpack.config';
@@ -35,18 +37,30 @@ const pug = new KoaPug({
 });
 pug.use(app);
 
-app.use(webpackMiddleware(
-  webpack(webpackConfig),
-  {
-    serverSideRender: true,
-    lazy: true,
-    publicPath: '/',
-  },
-));
 app.use(KoaLogger());
-app.use(KoaStatic(path.resolve(__dirname, './publics'), {
-  maxage: (isDev ? 0 : 1000 * 60 * 60),
-}));
+/**
+ * 开发环境调用内存中静态资源
+ * 生产环境调用打包后的文件
+ */
+if (isDev) {
+  /**
+   * 中间件说明：
+   * 每当页面发起请求后中间件就会根据配置文件进行打包
+   * 打包的文件会被存入内存中等待使用
+   */
+  app.use(webpackMiddleware(
+    webpack(webpackConfig),
+    {
+      serverSideRender: true, // 开启服务端渲染模式
+      lazy: true, // 发起请求则进行打包
+      publicPath: '/', // 静态资源请求路径
+    },
+  ));
+} else {
+  app.use(KoaStatic(path.resolve(__dirname, './publics'), {
+    maxage: (isDev ? 0 : 1000 * 60 * 60),
+  }));
+}
 app.use(router.routes());
 app.use(router.allowedMethods());
 

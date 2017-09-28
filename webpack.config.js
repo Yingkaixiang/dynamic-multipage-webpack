@@ -28,13 +28,13 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       template: 'src/views/test.pug',
       filename: '../views/test.pug',
       inject: 'body',
       hash: true,
-      chunks: ['test'],
+      chunks: ['tests'],
     }),
     new MyHtmlWebpackPlugin(),
     new HtmlWebpackPugPlugin(),
