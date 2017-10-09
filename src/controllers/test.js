@@ -1,10 +1,13 @@
 export async function getCurrentTime(ctx) {
-  const source = ctx.state.webpackStats.toJson().assetsByChunkName;
-  await ctx.render('test.pug', source);
+  // const source = ctx.state.webpackStats.toJson().assetsByChunkName;
+  await ctx.render('test.pug');
 }
 
 export async function demo(ctx) {
-  const { demo } = ctx.state.webpackStats.toJson().assetsByChunkName;
-  console.dir(demo);
-  await ctx.render('mobile/demo.pug', { source: demo });
+  if (ENV !== 'production') {
+    const { demo } = ctx.state.webpackStats.toJson().assetsByChunkName;
+    await ctx.render('mobile/demo.pug', { source: demo });
+  } else {
+    await ctx.render('demo.pug');
+  }
 }

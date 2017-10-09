@@ -11,7 +11,8 @@ import path from 'path';
 import _ from 'lodash';
 
 import routes from './routes';
-import webpackConfig from '../webpack.config';
+import webpackDevConfig from '../webpack.dev';
+import webpackProdConfig from '../webpack.prod';
 
 global.ENV = process.env.NODE_ENV || 'development';
 const isDev = ENV === 'development';
@@ -49,7 +50,7 @@ if (isDev) {
    * 打包的文件会被存入内存中等待使用
    */
   app.use(webpackMiddleware(
-    webpack(webpackConfig),
+    webpack(webpackDevConfig),
     {
       serverSideRender: true, // 开启服务端渲染模式
       lazy: true, // 发起请求则进行打包
@@ -57,7 +58,7 @@ if (isDev) {
     },
   ));
 } else {
-  app.use(KoaStatic(path.resolve(__dirname, './publics'), {
+  app.use(KoaStatic(path.resolve(__dirname, './'), {
     maxage: (isDev ? 0 : 1000 * 60 * 60),
   }));
 }
