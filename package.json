@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "NODE_ENV=production NODE_PORT=3001 node dist/app.js",
+    "start": "npm run build && NODE_ENV=production NODE_PORT=3001 node dist/app.js",
     "build": "webpack --config webpack.prod.js && babel src -d dist"
   },
   "author": "应开翔",

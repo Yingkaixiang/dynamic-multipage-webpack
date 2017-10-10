@@ -8,6 +8,6 @@ export async function demo(ctx) {
     const { demo } = ctx.state.webpackStats.toJson().assetsByChunkName;
     await ctx.render('mobile/demo.pug', { source: demo });
   } else {
-    await ctx.render('demo.pug');
+    await ctx.render('mobile/demo.pug');
   }
 }

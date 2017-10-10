@@ -1,6 +1,5 @@
 /**
  * todo:
- * pug文件目录错误问题
  * 正式环境使用 webpack.prod 打包
  */
 
@@ -46,11 +45,10 @@ const config = {
 // 生成新模板
 const files = glob.sync('./src/views/**/*.pug');
 files.forEach((file) => {
-  const basename = path.basename(file);
-  const filename = path.basename(file, '.pug');
+  const filename = path.parse(file).name;
   config.plugins.push(new HtmlWebpackPlugin({
     template: file,
-    filename: `../views/${basename}`,
+    filename: file.replace(/^\.\/src/, '..'),
     chunks: [filename],
     inject: filename === 'layout' ? 'head' : 'body',
   }));
