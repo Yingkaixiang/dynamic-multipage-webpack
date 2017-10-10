@@ -12,7 +12,6 @@ import _ from 'lodash';
 
 import routes from './routes';
 import webpackDevConfig from '../webpack.dev';
-import webpackProdConfig from '../webpack.prod';
 
 global.ENV = process.env.NODE_ENV || 'development';
 const isDev = ENV === 'development';
@@ -57,6 +56,16 @@ if (isDev) {
       publicPath: '/', // 静态资源请求路径
     },
   ));
+
+  app.use(async (ctx, next) => {
+    ctx.renderData = {};
+    if (ENV === 'development') {
+      ctx.renderData.assets = ctx.state.webpackStats.toJson().assetsByChunkName;
+    } else {
+      ctx.renderData.assets = {};
+    }
+    await next();
+  });
 } else {
   app.use(KoaStatic(path.resolve(__dirname, './'), {
     maxage: (isDev ? 0 : 1000 * 60 * 60),

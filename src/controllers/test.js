@@ -4,10 +4,5 @@ export async function getCurrentTime(ctx) {
 }
 
 export async function demo(ctx) {
-  if (ENV !== 'production') {
-    const { demo } = ctx.state.webpackStats.toJson().assetsByChunkName;
-    await ctx.render('mobile/demo.pug', { source: demo });
-  } else {
-    await ctx.render('mobile/demo.pug');
-  }
+  await ctx.render('mobile/demo.pug', ctx.renderData);
 }
