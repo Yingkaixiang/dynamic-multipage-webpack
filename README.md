@@ -5,7 +5,8 @@
 因为使用 ```webpack``` 进行打包工作所以静态资源必须进行编译后才能使用。所以在测试环境中调试就会变的很麻烦，不可能在每次保存修改的时候都进行一次打包工作，这样会浪费很多时间。所以使用了 ```webpack-koa2-middleware``` 这个包。它是对 ```webpack-dev-middleware``` 进行了简单的封装以便提供给 ```koa``` 框架使用。当我们保存修改时，他会根据 ```webpack``` 的配置文件将静态资源打包在内存中使用。
 
 项目初始化时会将内存中的路径写入一个对象中
-```
+
+```js
 app.use(async (ctx, next) => {
   ctx.renderData = {};
   if (ENV === 'development') {
@@ -18,12 +19,14 @@ app.use(async (ctx, next) => {
 ```
 
 将路径信息传入模板引擎
-```
+
+```js
 await ctx.render('mobile/demo.pug', ctx.renderData);
 ```
 
 在模板引擎中引入静态资源
-```
+
+```js
 script(src= assets.demo[0])
 link(href= assets.demo[1], rel="stylesheet")
 ```
