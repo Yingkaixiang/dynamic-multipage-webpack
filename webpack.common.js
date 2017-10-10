@@ -1,8 +1,3 @@
-/**
- * todo:
- * 正式环境使用 webpack.prod 打包
- */
-
 const path = require('path');
 const glob = require('glob');
 
