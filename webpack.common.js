@@ -12,6 +12,7 @@ const config = {
       './src/publics/js/lib/common.js',
     ],
     moment: [
+      './src/publics/js/lib/alloyfinger.js',
       './src/publics/js/moment.js',
     ],
   },
@@ -28,6 +29,15 @@ const config = {
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader'],
         }),
+      },
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env'],
+          },
+        },
       },
     ],
   },

@@ -7,5 +7,6 @@ module.exports = {
   "globals": {
     "ENV": true,
     "LANGUAGE": true,
+    "AlloyFinger": true,
   }
 };

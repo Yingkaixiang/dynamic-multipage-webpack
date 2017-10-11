@@ -1,8 +1,7 @@
-import AlloyFinger from 'alloyfinger';
 import '../sass/moment.scss';
 
-var avatar = new AlloyFinger('#avatar', {
-  tap: function () {
+const avatar = new AlloyFinger('#avatar', {
+  tap() {
     alert(123);
   },
 });
