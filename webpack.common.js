@@ -8,11 +8,11 @@ const MyHtmlWebpackPlugin = require('./lib/myHtmlWebpackPlugin');
 
 const config = {
   entry: {
-    moment: [
-      './src/publics/js/moment.js',
-    ],
     layout: [
       './src/publics/js/lib/common.js',
+    ],
+    moment: [
+      './src/publics/js/moment.js',
     ],
   },
   output: {
@@ -40,10 +40,16 @@ const config = {
 const files = glob.sync('./src/views/**/*.pug');
 files.forEach((file) => {
   const filename = path.parse(file).name;
+  const chunks = ['layout', filename];
   config.plugins.push(new HtmlWebpackPlugin({
     template: `raw-loader!${file}`,
     filename: file.replace(/^\.\/src/, '..'),
-    chunks: [filename, 'layout'],
+    chunks,
+    chunksSortMode: (chunk1, chunk2) => {
+      const order1 = chunks.indexOf(chunk1.names[0]);
+      const order2 = chunks.indexOf(chunk2.names[0]);
+      return order1 - order2;
+    },
   }));
 });
 
