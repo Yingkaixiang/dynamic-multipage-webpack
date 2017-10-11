@@ -11,6 +11,7 @@
   "author": "应开翔",
   "license": "ISC",
   "dependencies": {
+    "alloyfinger": "^0.1.10",
     "es6-requireindex": "^0.3.10",
     "glob": "^7.1.2",
     "jquery": "^3.2.1",

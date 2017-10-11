@@ -1,6 +1,3 @@
-//- 照片组件
-include ./components/momentPhotos.pug
-
 doctype html
 html
   head
@@ -10,6 +7,14 @@ html
   body
     div.main
       div.container
-        +momentPhotos()
+        div.header
+          div.avatar#avatar
+            img(src= 'https://dn-coding-net-production-static.qbox.me/adba820b-e48f-45f8-a956-eb3125b926d1.JPG?imageMogr2/auto-orient/format/jpeg/crop/!150x150a0a0/thumbnail/80')
+          div.header-content
+            span.nickname 有鸟
+            span.header-content-text 发布了一个话题
+          span.create-time 5天前
+        div.media
+        div.content
     script(src= `/${assets.moment[0]}`)
     script(src= `/${assets.layout[0]}`)
