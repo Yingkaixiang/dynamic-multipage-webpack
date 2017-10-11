@@ -1,0 +1,13 @@
+@import 'lib/common.scss';
+
+.main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container{
+  width: px2rem(340px);
+  margin-top: px2rem(12px);
+}

@@ -8,12 +8,10 @@ const MyHtmlWebpackPlugin = require('./lib/myHtmlWebpackPlugin');
 
 const config = {
   entry: {
-    demo: [
-      './src/publics/js/demo.js',
-      './src/publics/js/demo1.js',
+    moment: [
+      './src/publics/js/moment.js',
     ],
     layout: [
-      './src/publics/js/lib/flexible.js',
       './src/publics/js/lib/common.js',
     ],
   },
@@ -43,10 +41,9 @@ const files = glob.sync('./src/views/**/*.pug');
 files.forEach((file) => {
   const filename = path.parse(file).name;
   config.plugins.push(new HtmlWebpackPlugin({
-    template: file,
+    template: `raw-loader!${file}`,
     filename: file.replace(/^\.\/src/, '..'),
-    chunks: [filename],
-    inject: filename === 'layout' ? 'head' : 'body',
+    chunks: [filename, 'layout'],
   }));
 });
 

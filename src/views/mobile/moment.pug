@@ -1,7 +1,15 @@
-extends layout.pug
+//- 照片组件
+include ./components/momentPhotos.pug
 
-block head
-  title= data.title || ''
-
-block body
-  
+doctype html
+html
+  head
+    title= data.title || ''
+    include ./components/head.pug
+    link(rel="stylesheet", href= `/${assets.moment[1]}`)
+  body
+    div.main
+      div.container
+        +momentPhotos()
+    script(src= `/${assets.moment[0]}`)
+    script(src= `/${assets.layout[0]}`)

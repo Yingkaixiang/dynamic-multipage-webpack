@@ -1,1 +1,1 @@
-import '../../sass/lib/reset.scss';
+import '../../sass/lib/common.scss';
