@@ -11,6 +11,7 @@ import path from 'path';
 import _ from 'lodash';
 
 import routes from './routes';
+import language from './middlewares/language';
 import webpackDevConfig from '../webpack.dev';
 
 global.ENV = process.env.NODE_ENV || 'development';
@@ -19,6 +20,15 @@ const isDev = ENV === 'development';
 const app = new Koa();
 const router = new KoaRouter();
 routes(router);
+
+// 初始化数据
+app.use(async (ctx, next) => {
+  ctx.renderData = {};
+  await next();
+});
+
+// 获取页面所使用的语言
+app.use(language);
 
 /**
  * 模板引擎初始化
@@ -58,7 +68,6 @@ if (isDev) {
   ));
 
   app.use(async (ctx, next) => {
-    ctx.renderData = {};
     if (ENV === 'development') {
       ctx.renderData.assets = ctx.state.webpackStats.toJson().assetsByChunkName;
     } else {

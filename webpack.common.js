@@ -1,7 +1,6 @@
 const path = require('path');
 const glob = require('glob');
 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -13,7 +12,10 @@ const config = {
       './src/publics/js/demo.js',
       './src/publics/js/demo1.js',
     ],
-    layout: './src/publics/js/common.js',
+    layout: [
+      './src/publics/js/lib/flexible.js',
+      './src/publics/js/lib/common.js',
+    ],
   },
   output: {
     filename: '[name].[chunkhash].js',
@@ -32,7 +34,6 @@ const config = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
     new ExtractTextPlugin('[name].[chunkhash].css'),
   ],
 };

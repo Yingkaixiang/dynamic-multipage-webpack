@@ -2,10 +2,10 @@ extends layout.pug
 
 block head
   head
-    link(href= assets.demo[1], rel="stylesheet")
+    link(href= `/${assets.demo[1]}`, rel="stylesheet")
 
 block body
   body
     h1 123
     div 331231
-    script(src= assets.demo[0])
+    script(src= `/${assets.demo[0]}`)
