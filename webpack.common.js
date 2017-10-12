@@ -39,6 +39,18 @@ const config = {
           },
         },
       },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'url-loader?limit=5120',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [

@@ -13,6 +13,10 @@
   width: px2rem(340px);
 }
 
+.moment{
+  width: 100%;
+}
+
 .header{
   display: flex;
   margin-bottom: px2rem(10px);
@@ -68,6 +72,151 @@
 .content{
   margin-bottom: px2rem(16px);
   width: 100%;
-  height: px2rem(40px);
-  background: $main-color;
+  color: #0D0D0D;
+  letter-spacing: -0.3;
+  font-size: px2rem(13px);
+}
+
+.theme{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/scenery-19.png");
+
+  align-items: center;
+  justify-content: center;
+
+  &-mask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+  }
+
+  &-quote{
+    position: absolute;
+    width: px2rem(18px);
+    height: px2rem(18px);
+    background-color: red;
+
+    &-left{
+      top: px2rem(-24px);
+      left: 0;
+    }
+
+    &-right{
+      right: 0;
+      bottom: px2rem(-24px);
+    }
+  }
+
+  &-title{
+    position: relative;
+    width: px2rem(300px);
+    color: #FFFFFF;
+    letter-spacing: -0.55;
+    font-size: px2rem(14px);
+    line-height: px2rem(16px);
+    opacity: 0.8;
+  }
+
+  &-btn{
+    position: absolute;
+    bottom: px2rem(18px);
+    left: 50%;
+    display: flex;
+    margin-left: px2rem(-50px);
+    width: px2rem(100px);
+    height: px2rem(30px);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: px2rem(13px);
+    cursor: pointer;
+
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.divline{
+  width: 100%;
+  height: px2rem(8px);
+  background: #F3F3F3;
+}
+
+.sec{
+  display: flex;
+  margin-bottom: px2rem(16px);
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btns{
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.btn{
+  margin-right: px2rem(26px);
+  width: px2rem(18px);
+  height: px2rem(16px);
+  background: red;
+}
+
+.btn:last-child{
+  margin-right: 0;
+}
+
+.comment-avatars{
+  display: flex;
+}
+
+.comment-avatar{
+  overflow: hidden;
+  margin-right: px2rem(5px);
+  width: px2rem(25px);
+  height: px2rem(25px);
+  border-radius: 50%;
+  background: red;
+}
+
+.moment-data{
+  display: flex;
+  color: rgb(142, 142, 142);
+  letter-spacing: -0.01;
+  font-weight: 500;
+  font-size: px2rem(12px);
+
+  span{
+    margin-right: px2rem(20px);
+  }
+}
+
+.top3comment{
+  display: flex;
+  flex-direction: column;
+  margin: px2rem(15px) 0;
+  width: 100%;
+
+  .comment{
+    margin-bottom: px2rem(10px);
+    width: 100%;
+    letter-spacing: 0.04;
+    font-size: px2rem(13px);
+    line-height: px2rem(13px);
+
+    .nickname{
+      color: $main-color;
+    }
+
+    .comment-content{
+      color: rgb(133, 132, 132);
+    }
+  }
 }
