@@ -1,110 +1,4 @@
-- const i18n = data.i18n
-- const moment = data.momentData
-
-//- 日志
-mixin moment()
-  div.container
-
-    //- 头部信息
-    div.header
-      div.avatar#avatar
-        img(src= moment.avatar)
-      div.header-content
-        span.nickname= moment.nickname
-        span.header-content-text= i18n.pubTheme
-      span.create-time= utils.formatAppDateStr(moment.momentsTime)
-    
-    //- 多媒体信息，包括照片、话题、推荐、视频等等形式
-    - if (moment.momentsType === 'theme' || moment.momentsType === 'ad')
-      div.media
-        +theme(moment)
-    - else if (moment.momentsType === 'image')
-      div.media
-        +photos()
-    - else
-      div.media
-        +unknow()
-
-    //- 日志内容
-    - if (moment.momentsText && moment.momentsType !== 'theme')
-      div.content= moment.momentsText
-
-    //- 评论头像以及功能按钮
-    div.sec
-      +winkAvatars(moment.winkUserList)
-      +btns()
-    div.sec
-      +momentdata(moment)
-    //- 前三条评论
-    +top3Comment(moment.commentList)
-    
-
-//- 话题
-mixin theme()
-  div.theme(
-    style={
-      'background-image': `url(${moment.imageUrl})`,
-    }
-  )
-    div.theme-mask
-    div.theme-title
-      div.theme-quote.theme-quote-left
-      div.theme-quote.theme-quote-right
-      span= moment.momentsText
-    div.theme-btn#viewDetail= `${moment.themeClass || i18n.viewDetail} >`
-
-//- 照片
-mixin photos()
-  div.photos
-    div.photos-item
-      img(src= "https://coding.net/static/project_icon/scenery-1.png")
-    div.photos-item
-      img(src= "https://coding.net/static/project_icon/scenery-2.png")
-    div.photos-item
-      img(src= "https://coding.net/static/project_icon/scenery-3.png")
-    div.photos-item
-      img(src= "https://coding.net/static/project_icon/scenery-4.png")
-
-//- 未知的日志类型
-mixin unknow()
-  div.unknow 未知的日志类型
-
-
-//- 功能按钮
-mixin btns()
-  div.btns
-    div.btn
-    div.btn
-    div.btn
-
-//- 头像列表
-mixin winkAvatars(list)
-  div.wink-avatars
-    - for (let i = 0; i < list.length; i++)
-      div.wink-avatar
-        img(
-          src= list[i].avatar,
-          alt= list[i].nickname,
-          title= list[i].nickname
-        )
-
-//- 日志数据
-mixin momentdata()
-  div.moment-data
-    span= `${moment.winkNum} 喜欢`
-    span= `${moment.commentNum} 评论`
-
-//- 前三条评论
-mixin top3Comment(list)
-  div.top3comment
-    - for (let i = 0; i < 3; i++)
-      p.comment
-        span.nickname= `${list[i].nickname}：`
-        span.comment-content= list[i].commentText
-
-//- 分割线
-mixin divline()
-  div.divline
+include ./components/moment.pug
 
 doctype html
 html
@@ -114,7 +8,7 @@ html
     link(rel="stylesheet", href= `/${assets.moment[1]}`)
   body
     div.main
-      +moment()
+      +moment(data.momentData, data.i18n)
       div.divline
     script(src= `/${assets.moment[0]}`)
     script(src= `/${assets.layout[0]}`)

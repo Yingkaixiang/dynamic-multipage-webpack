@@ -1,0 +1,100 @@
+//- 日志模板
+mixin moment(moment, i18n)
+  div.container
+
+    div.header
+      div.avatar#avatar
+        img(src= moment.avatar)
+      div.header-content
+        span.nickname= moment.nickname
+        span.header-content-text= i18n.pubTheme
+      span.create-time= utils.formatMomentDate(moment.momentsTime)
+    
+    - const type = moment.momentsType
+    - if (type === 'theme' || type === 'ad')
+      div.media
+        +theme(moment, i18n)
+    - else if (type === 'text')
+      div
+    - else if (type === 'image')
+      div.media
+        +photos(moment.imageUrl)
+    - else if (type === 'text_image')
+      div.media
+        +photos(moment.imageUrl)
+    - else
+      div.media
+        +unknow()
+
+    - if (moment.momentsText && moment.momentsType !== 'theme')
+      div.content !{utils.formatMomentTag(moment.momentsText)}
+
+    div.sec
+      +winkAvatars(moment.winkUserList)
+      +btns()
+    div.sec
+      +momentdata(moment)
+
+    +top3Comment(moment.commentList)
+
+//--------------------------------------------
+//- 话题
+mixin theme(moment, i18n)
+  div.theme(
+    style={
+      'background-image': `url(${moment.imageUrl})`,
+    }
+  )
+    div.theme-mask
+    div.theme-title
+      div.theme-quote.theme-quote-left
+      div.theme-quote.theme-quote-right
+      span= moment.momentsText
+    div.theme-btn#viewDetail= `${moment.themeClass || i18n.viewDetail} >`
+
+//- 照片
+mixin photos(imgUrl)
+  div.photos
+    - const arr = imgUrl.split(',')
+    - const length = arr.length
+    - if (length === 1)
+      img(src= arr[0])
+
+//- 未知的日志类型
+mixin unknow()
+  div.unknow 未知的日志类型
+
+//--------------------------------------------
+//- 点赞列表
+mixin winkAvatars(list)
+  div.wink-avatars
+    - for (let i = 0; i < list.length; i++)
+      div.wink-avatar
+        img(
+          src= list[i].avatar,
+          alt= list[i].nickname,
+          title= list[i].nickname
+        )
+
+//- 功能按钮
+mixin btns()
+  div.btns
+    div.btn
+    div.btn
+    div.btn
+
+//- 日志数据
+mixin momentdata(moment)
+  div.moment-data
+    span= `${moment.winkNum} 喜欢`
+    span= `${moment.commentNum} 评论`
+
+//- 前三条评论
+mixin top3Comment(list)
+  div.top3comment
+    - if (list.length > 0)
+      - for (let i = 0; i < 3; i++)
+        p.comment
+          span.nickname= `${list[i].nickname}：`
+          span.comment-content= list[i].commentText
+

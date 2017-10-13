@@ -8,6 +8,7 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-koa2-middleware';
 
 import path from 'path';
+import yargs from 'yargs';
 
 import routes from './routes';
 import language from './middlewares/language';
@@ -83,4 +84,4 @@ if (isDev) {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-app.listen(process.env.NODE_PORT || '3000');
+app.listen(yargs.argv.port || '3000');

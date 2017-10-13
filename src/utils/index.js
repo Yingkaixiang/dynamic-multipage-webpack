@@ -1,5 +1,5 @@
 // 格式化app接口返回的时间格式
-function formatAppDateStr(str) {
+function formatMomentDate(str) {
   if (!str) {
     return '';
   }
@@ -14,7 +14,13 @@ function formatAppDateStr(str) {
   return `${arr[1]}${format[arr[0]] || ''}`;
 }
 
+// 标签匹配
+function formatMomentTag(str) {
+  return str.replace(/(#.*#)/g, '<span>$1</span>');
+}
+
 export default {
-  formatAppDateStr,
+  formatMomentDate,
+  formatMomentTag,
 };
 

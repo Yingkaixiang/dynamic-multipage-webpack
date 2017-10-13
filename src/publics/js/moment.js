@@ -5,9 +5,3 @@ const avatar = new AlloyFinger('#avatar', {
     alert('跳转');
   },
 });
-
-const viewDetail = new AlloyFinger('#viewDetail', {
-  tap() {
-    alert('查看详情');
-  },
-});
