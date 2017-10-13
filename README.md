@@ -66,10 +66,10 @@ npm run start
 
 ## 线上部署
 
-```dist``` 目录下的代码为打包后的生产代码，部署至服务器即可使用
+```dist``` 目录下的代码为打包后的生产代码，部署至服务器即可使用 ```port``` 为端口号 ```config``` 为配置文件获取方式。
 
 ```
-NODE_ENV=production NODE_PORT=<port> node app.js
+NODE_ENV=production node app.js --port=<port> --config=<file|consul>
 ```
 
 ## 如何创建一个页面
