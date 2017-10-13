@@ -7,3 +7,4 @@
 # 配置文件
 /src/config/api.js
 /src/config/development.js
+/src/config/production.js
