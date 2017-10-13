@@ -15,6 +15,9 @@ const config = {
       './src/publics/js/lib/alloyfinger.js',
       './src/publics/js/moment.js',
     ],
+    demo: [
+      './src/publics/js/demo.js',
+    ],
   },
   output: {
     filename: '[name].[chunkhash].js',
