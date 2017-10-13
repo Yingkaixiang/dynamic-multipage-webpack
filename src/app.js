@@ -8,11 +8,11 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-koa2-middleware';
 
 import path from 'path';
-import _ from 'lodash';
 
 import routes from './routes';
 import language from './middlewares/language';
 import webpackDevConfig from '../webpack.dev';
+import utils from './utils';
 
 global.ENV = process.env.NODE_ENV || 'development';
 const isDev = ENV === 'development';
@@ -43,7 +43,7 @@ const pug = new KoaPug({
   compileDebug: isDev,
   locals: { ENV, timestamp: Date.now() },
   noCache: isDev,
-  helperPath: [{ _ }],
+  helperPath: [{ utils }],
 });
 pug.use(app);
 

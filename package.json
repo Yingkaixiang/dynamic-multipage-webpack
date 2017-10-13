@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "alloyfinger": "^0.1.10",
+    "axios": "^0.16.2",
     "es6-requireindex": "^0.3.10",
     "glob": "^7.1.2",
     "jquery": "^3.2.1",

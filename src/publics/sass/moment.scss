@@ -32,7 +32,7 @@
     width: px2rem(37px);
     height: px2rem(37px);
     border-radius: 50%;
-    background: $main-color;
+    cursor: pointer;
 
     img{
       width: 100%;
@@ -66,7 +66,6 @@
   margin-bottom: px2rem(10px);
   width: 100%;
   height: px2rem(340px);
-  background: $main-color;
 }
 
 .content{
@@ -77,13 +76,13 @@
   font-size: px2rem(13px);
 }
 
+//- 话题
 .theme{
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-image: url("../img/scenery-19.png");
 
   align-items: center;
   justify-content: center;
@@ -141,6 +140,40 @@
   }
 }
 
+//- 照片
+.photos{
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+
+  &-item{
+    overflow: hidden;
+    width: px2rem(169px);
+    height: px2rem(169px);
+
+    img{
+      width: 100%;
+    }
+  }
+}
+
+//-  未知类型
+.unknow{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #999999;
+  color: #666666;
+  font-size: px2rem(22px);
+
+  justify-content: center;
+  align-items: center;
+}
+
 .divline{
   width: 100%;
   height: px2rem(8px);
@@ -173,17 +206,22 @@
   margin-right: 0;
 }
 
-.comment-avatars{
+.wink-avatars{
   display: flex;
 }
 
-.comment-avatar{
+.wink-avatar{
+  overflow: hidden;
   overflow: hidden;
   margin-right: px2rem(5px);
   width: px2rem(25px);
   height: px2rem(25px);
   border-radius: 50%;
-  background: red;
+  cursor: pointer;
+
+  img{
+    width: 100%;
+  }
 }
 
 .moment-data{
